@@ -100,10 +100,38 @@ pessoa.deletar()
 
 ### 📸 Exemplo de Teste Unitário: Inclusão e Exclusão de Dados
 
+
 Abaixo, uma imagem demonstrando o teste de inclusão e exclusão de dados com SQLAlchemy.
 
 ![funcionamento do projeto](./teste_inclusão&exclusão_sqlalchemy.png)
 
 ---
 
-Este README fornece uma visão detalhada das interações com o banco de dados utilizando SQLAlchemy, abrangendo os principais comandos e estruturas para manipulação de dados no Python.
+### 📸 DB Browser for SQLite no Ubuntu - funcionamento
+
+![Visualização da Tabela no DB Browser for SQLite](./visualizacao.png)
+
+### Instalação do DB Browser for SQLite no Ubuntu
+
+Siga os passos abaixo para instalar o DB Browser for SQLite no Ubuntu:
+
+1. Atualize os pacotes do sistema:
+   ```bash
+   sudo apt update
+   ```
+
+2. Instale o DB Browser for SQLite:
+   ```bash
+   sudo apt install sqlitebrowser
+   ```
+
+3. Execute o DB Browser com o comando:
+   ```bash
+   sqlitebrowser
+   ```
+
+Agora, você pode abrir o arquivo `atividades.db` e visualizar, alterar e excluir as tabelas e dados inseridos diretamente no DB Browser se for o caso.
+
+---
+
+Este README fornece uma visão detalhada das interações com o banco de dados utilizando SQLAlchemy, detalhando como manipular dados de maneira simples e eficaz, além de instruções para visualizar o banco de dados usando o DB Browser for SQLite no Ubuntu.
