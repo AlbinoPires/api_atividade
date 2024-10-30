@@ -58,6 +58,14 @@ class Pessoas(Base):
 
 ### 3. Operações CRUD com SQLAlchemy
 
+## Imagem de Teste unitário, incluindo, salvando e excluindo:
+
+Aqui está uma imagem demonstrando o código em execução:
+
+![funcionamento do projeto](./teste_inclusão&exclusão_sqlalchemy.png)
+
+
+
 #### Criar (Inserir Dados)
 
 Para inserir um novo registro, crie uma instância da classe `Pessoas` e chame o método `save`:
