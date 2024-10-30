@@ -1,0 +1,87 @@
+Explicando a base dos comandos utilizados para orientação:
+
+Resumo das Funções
+
+- create_engine: Conecta ao banco de dados. Aqui, utiliza o SQLite e cria o arquivo `atividades.db`.
+
+- scoped_session e sessionmaker: Gerenciam a sessão de banco de dados para garantir que operações e transações sejam organizadas de forma segura,
+especialmente em aplicativos que podem ter múltiplas operações simultâneas.
+
+- declarative_base: Cria uma classe base para definir as tabelas e modelos.
+O declarative_base cria uma classe base no SQLAlchemy, da qual todas as classes de modelo (tabelas) vão herdar. 
+Em outras palavras, ele permite definir as tabelas do banco de dados como classes Python.
+    Com declarative_base, cada tabela é representada como uma classe Python, e as colunas são atributos dessas classes. 
+Isso facilita o mapeamento objeto-relacional (ORM), permitindo que você interaja com o banco de dados como se 
+estivesse manipulando objetos Python.
+
+- query_property(): Adiciona uma propriedade `query` aos modelos, facilitando consultas ao banco de dados.
+O query_property() adiciona uma propriedade query a todas as classes derivadas de Base. Essa propriedade permite que você faça consultas de maneira
+mais simples e direta. Por exemplo, ao invés de acessar a sessão para fazer uma consulta, você pode usar Classe.query diretamente para realizar 
+operações de busca e manipulação de dados no banco, facilitando o trabalho com as tabelas.
+
+- O parâmetro autocommit=False no sessionmaker define que as operações de banco de dados não serão automaticamente confirmadas. Em vez disso, 
+é necessário chamar o método commit() explicitamente para que as mudanças sejam salvas. Isso permite um controle manual sobre as transações, 
+garantindo que você possa revisar ou desfazer alterações (com rollback()) antes de confirmá-las no banco.
+
+
+Esse código é uma configuração padrão com SQLAlchemy, especialmente útil para projetos onde várias operações de leitura e escrita serão feitas.
+
+
+#Nota:
+
+O `scoped_session` é uma ferramenta poderosa do SQLAlchemy que ajuda a gerenciar sessões de banco de dados, principalmente em
+ aplicações com múltiplas threads (como em um servidor web). Ele faz isso ao garantir que cada thread tenha sua própria 
+ sessão independente, evitando interferência entre sessões em diferentes threads.
+
+Aqui está como funciona:
+
+1. Isolamento de Sessão: Cada thread recebe uma sessão exclusiva, o que significa que, mesmo que vários usuários estejam acessando o banco 
+simultaneamente, suas operações de banco de dados não irão interferir umas com as outras.
+
+2. Criação Automática de Sessão: O `scoped_session` cria sessões automaticamente quando necessário e as mantém isoladas, sem a necessidade 
+de instância manual toda vez que uma operação é feita.
+
+3. Finalização e Liberação de Recursos: Quando o trabalho na sessão é concluído, `scoped_session` pode encerrar a sessão e liberar os recursos
+automaticamente, tornando a aplicação mais eficiente.
+
+Resumindo, o `scoped_session` é essencial em cenários onde o controle de múltiplas operações simultâneas é importante, garantindo que cada 
+operação funcione sem conflitos.
+
+
+'from sqlalchemy import create_engine, Column, Integer, String'
+Column - Importando para criar colunas
+Integer - Importando para definir o tipo como inteiro
+String - Importando para definir colunas do tipo String
+
+# ForeignKey e relationship
+
+1. `ForeignKey`
+- Definição: A chave estrangeira (ForeignKey) é um campo em uma tabela que referencia a chave primária de outra tabela. Ela estabelece uma relação entre duas tabelas, vinculando-as por meio de um campo comum.
+- Uso no SQLAlchemy No SQLAlchemy, uma chave estrangeira é declarada com o tipo `ForeignKey` dentro da definição de uma coluna. Por exemplo, `user_id = Column(Integer, ForeignKey('users.id'))` define que a coluna `user_id` faz referência ao campo `id` da tabela `users`.
+- Objetivo O principal objetivo de uma `ForeignKey` é manter a integridade referencial, garantindo que os registros em uma tabela estejam corretamente relacionados a registros válidos em outra tabela.
+
+2. `relationship`
+- Definição: A função relationship no SQLAlchemy é usada para definir a relação de alto nível entre duas tabelas (classes). Enquanto `ForeignKey` representa o vínculo na estrutura do banco de dados, `relationship` é usado para criar a associação entre as tabelas no nível do ORM, permitindo fácil acesso aos dados relacionados como objetos Python.
+- Uso no SQLAlchemy `relationship` é frequentemente usado em conjunto com `ForeignKey`. Por exemplo:
+  ```python
+  from sqlalchemy import Column, Integer, String, ForeignKey
+  from sqlalchemy.orm import relationship
+
+  class User(Base):
+      __tablename__ = 'users'
+      id = Column(Integer, primary_key=True)
+      name = Column(String)
+      addresses = relationship("Address", back_populates="user")
+
+  class Address(Base):
+      __tablename__ = 'addresses'
+      id = Column(Integer, primary_key=True)
+      user_id = Column(Integer, ForeignKey('users.id'))
+      user = relationship("User", back_populates="addresses")
+  ```
+  - Aqui, `User` e `Address` estão relacionados, permitindo que, ao acessar `user.addresses`, você obtenha todos os endereços associados ao usuário.
+
+- Objetivo A `relationship` facilita o trabalho com dados relacionados, permitindo o acesso direto aos dados de uma tabela vinculada como uma lista de objetos ou como um único objeto (dependendo do tipo de relacionamento).
+
+Esses conceitos, juntos, são fundamentais para criar associações entre tabelas e trabalhar de forma prática com dados relacionados.
+
