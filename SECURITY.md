@@ -2,6 +2,13 @@
 
 🌐 **Cloud Enthusiast | AWS Cloud | Python | Linux | Flask**
 
+## 🌐 Onde me encontrar
+
+- [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/albino-pires-b188391b3/)
+- [![Gmail](https://img.shields.io/badge/Gmail-333333?style=for-the-badge&logo=gmail&logoColor=red)](mailto:albinofp34@gmail.com)
+- [![DIO](https://img.shields.io/badge/DIO-30A3DC?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAKlBMVEUBCQn///8AAADMzMzX19fGxsYxMTHs7OypqanU1NQsLCwzMzNdXV2ampqysrKg2cPMAAAAAXRSTlMAQObYZgAAAP9JREFUeF7t2qEJwiAQRNGZyP9Xzr4W0NBBA8+YkUdm7p+al0FCIiCAQCBBgO+BX8dGZNBjJXyD8UK1y8GAQHBwAAAAAAAAAAAAB8x/wuJ3tnN/C+HYTnZO8LN+SrmU2/klrTG/VqXWQt6SbvmNbclY/TGWaTXc6zxVqXt8lrbGR2xJSfbbVmLVyxrpJlLtc0WW0ayDtvTNeUX2+6iMbUl77DduI/F7lmHMyLdsb+wPZtp45Fxb5l+nMOqMxqSc5PZUl2dG9KM4l9Kmvr67Rs5S8fQwAAAAAElFTkSuQmCC)](https://www.dio.me/users/albinofp34)
+
+
 ---
 # SECURITY.md
 

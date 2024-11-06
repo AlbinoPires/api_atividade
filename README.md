@@ -130,8 +130,6 @@ Siga os passos abaixo para instalar o DB Browser for SQLite no Ubuntu:
    sqlitebrowser
    ```
 
-Agora, você pode abrir o arquivo `atividades.db` e visualizar, alterar e excluir as tabelas e dados inseridos diretamente no DB Browser se for o caso.
+Agora, você pode abrir o arquivo `atividades.db` e visualizar, alterar e excluir as tabelas e dados inseridos diretamente no DB Browser se for o caso .
 
 ---
-
-Este README fornece uma visão detalhada das interações com o banco de dados utilizando SQLAlchemy, detalhando como manipular dados de maneira simples e eficaz, além de instruções para visualizar o banco de dados usando o DB Browser for SQLite no Ubuntu.
