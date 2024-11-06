@@ -52,6 +52,7 @@ A autenticação foi configurada para validar o login e a senha dos usuários re
 2. **Inserção de Usuários no Banco de Dados**
    - No `utils.py`, foi criada uma função `insere_usuario` para adicionar novos usuários:
      ```python
+     from models import Pessoas, Usuarios
      def insere_usuario(login, senha):
          usuario = Usuarios(login=login, senha=senha)
          usuario.save()
@@ -61,6 +62,7 @@ A autenticação foi configurada para validar o login e a senha dos usuários re
 3. **Configuração da Verificação de Autenticação**
    - No `app.py`, a autenticação foi implementada usando `@auth.verify_password` para validar os logins a partir da tabela `Usuarios`:
      ```python
+     from models import Pessoas, Atividades, Usuarios
      @auth.verify_password
      def verificacao(login, senha):
          if not (login and senha):
@@ -83,6 +85,11 @@ A autenticação foi configurada para validar o login e a senha dos usuários re
    - O teste no navegador confirma a autenticação dos usuários registrados (veja o exemplo em `tabela_usuarios_senhas.png`).
 
    ![Print do Teste de Autenticação](./security.png)
+
+   - A tabela criada para poder manipular essa persistência em conjunto com Api e autenticando com Flask-httpauth
+
+   ![Print do Teste de Autenticação](./tabela_usuarios_senhas.png)
+
 
 ### ✅ Considerações Finais e Recomendações
 
