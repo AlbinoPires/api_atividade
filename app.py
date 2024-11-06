@@ -2,7 +2,7 @@
 
 from flask import Flask
 from flask_restful import Resource, Api, request
-from models import Pessoas, Atividades
+from models import Pessoas, Atividades, Usuarios
 from flask_httpauth import HTTPBasicAuth
 
 
@@ -10,17 +10,26 @@ auth = HTTPBasicAuth()        #implementação da autenticação
 app = Flask(__name__)
 api = Api(app)
 
-USUARIOS = {
-    'admin':'123'
-}
+#USUARIOS = {                   SOMENTE PARA CONSULTA, EM UMA API SEM BD, CONSULTA NO HARDCODE
+#    'admin':'123'
+#}
+
+#função chamando a autenticação na logica do codigo
+#@auth.verify_password
+#def verificacao(usuario, senha):
+#    if not (usuario, senha):
+#        return False
+#    return USUARIOS.get(usuario) == senha
+
+
 
 
 #função chamando a autenticação na logica do codigo
 @auth.verify_password
-def verificacao(usuario, senha):
-    if not (usuario, senha):
+def verificacao(login, senha):
+    if not (login, senha):
         return False
-    return USUARIOS.get(usuario) == senha
+    return Usuarios.query.filter_by(login=login, senha=senha).first()
 
 class Pessoa(Resource):
     @auth.login_required
