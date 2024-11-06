@@ -1,3 +1,72 @@
+Algumas abordagens de resposta de erro comuns para APIs, incluindo exemplos específicos que podemos usar no projeto para
+documentar no GitHub. 
+
+
+1. Erro de Recurso Não Encontrado (404 Not Found)
+Para quando um recurso solicitado não existe no banco de dados, como no exemplo que você gostou.
+
+```python
+return {'status': 'erro', 'mensagem': f'Pessoa com nome "{nome}" não encontrada.'}, 404
+```
+
+2. Erro de Dados de Entrada Inválidos (400 Bad Request)
+Use este para indicar que os dados fornecidos na solicitação estão incorretos, como dados ausentes ou com tipo inválido.
+
+```python
+return {'status': 'erro', 'mensagem': 'Dados de entrada inválidos. Verifique os campos e tente novamente.'}, 400
+```
+
+3. Erro de Conflito (409 Conflict)
+Quando há um conflito na requisição, como tentar criar um recurso que já existe.
+
+```python
+return {'status': 'erro', 'mensagem': f'O recurso com o nome "{nome}" já existe.'}, 409
+```
+
+4. Erro de Autorização (401 Unauthorized)
+Caso a API exija autenticação para o acesso a determinados recursos, use o código de erro 401.
+
+```python
+return {'status': 'erro', 'mensagem': 'Não autorizado. Por favor, faça login para acessar este recurso.'}, 401
+```
+
+5. Erro de Proibição (403 Forbidden)
+Se o usuário está autenticado, mas não tem permissão para executar a ação.
+
+```python
+return {'status': 'erro', 'mensagem': 'Acesso proibido. Você não tem permissão para executar esta ação.'}, 403
+```
+
+6. Erro de Exceção Geral (500 Internal Server Error)
+Para exceções desconhecidas ou erros internos que não foram tratados por outros blocos de código.
+
+```python
+return {'status': 'erro', 'mensagem': 'Erro interno do servidor. Tente novamente mais tarde ou entre em contato com o administrador.'}, 500
+```
+
+7. Método Não Permitido (405 Method Not Allowed)
+Se o usuário tentar usar um método HTTP não suportado no endpoint.
+
+```python
+return {'status': 'erro', 'mensagem': f'O método {request.method} não é permitido para este recurso.'}, 405
+```
+
+8. Tempo de Solicitação Expirado (408 Request Timeout)
+Para requisições que demoraram muito para serem processadas.
+
+```python
+return {'status': 'erro', 'mensagem': 'Tempo de requisição expirado. Tente novamente.'}, 408
+```
+
+9. Erro de Tipo de Mídia Não Suportado (415 Unsupported Media Type)
+Caso o cliente envie dados em um formato não suportado.
+
+```python
+return {'status': 'erro', 'mensagem': 'Tipo de mídia não suportado. Use um tipo de mídia válido, como JSON.'}, 415
+```
+
+
+
 Explicando a base dos comandos utilizados para orientação:
 
 Resumo das Funções
@@ -56,12 +125,19 @@ String - Importando para definir colunas do tipo String
 # ForeignKey e relationship
 
 1. `ForeignKey`
-- Definição: A chave estrangeira (ForeignKey) é um campo em uma tabela que referencia a chave primária de outra tabela. Ela estabelece uma relação entre duas tabelas, vinculando-as por meio de um campo comum.
-- Uso no SQLAlchemy No SQLAlchemy, uma chave estrangeira é declarada com o tipo `ForeignKey` dentro da definição de uma coluna. Por exemplo, `user_id = Column(Integer, ForeignKey('users.id'))` define que a coluna `user_id` faz referência ao campo `id` da tabela `users`.
-- Objetivo O principal objetivo de uma `ForeignKey` é manter a integridade referencial, garantindo que os registros em uma tabela estejam corretamente relacionados a registros válidos em outra tabela.
+- Definição: A chave estrangeira (ForeignKey) é um campo em uma tabela que referencia a chave primária de outra tabela. Ela estabelece uma 
+relação entre duas tabelas, vinculando-as por meio de um campo comum.
+
+- Uso no SQLAlchemy No SQLAlchemy, uma chave estrangeira é declarada com o tipo `ForeignKey` dentro da definição de uma coluna. 
+Por exemplo, `user_id = Column(Integer, ForeignKey('users.id'))` define que a coluna `user_id` faz referência ao campo `id` da tabela `users`.
+- Objetivo O principal objetivo de uma `ForeignKey` é manter a integridade referencial, garantindo que os registros em uma tabela
+estejam corretamente relacionados a registros válidos em outra tabela.
 
 2. `relationship`
-- Definição: A função relationship no SQLAlchemy é usada para definir a relação de alto nível entre duas tabelas (classes). Enquanto `ForeignKey` representa o vínculo na estrutura do banco de dados, `relationship` é usado para criar a associação entre as tabelas no nível do ORM, permitindo fácil acesso aos dados relacionados como objetos Python.
+- Definição: A função relationship no SQLAlchemy é usada para definir a relação de alto nível entre duas tabelas (classes).
+ Enquanto `ForeignKey` representa o vínculo na estrutura do banco de dados, `relationship` é usado para criar a associação
+  entre as tabelas no nível do ORM, permitindo fácil acesso aos dados relacionados como objetos Python.
+
 - Uso no SQLAlchemy `relationship` é frequentemente usado em conjunto com `ForeignKey`. Por exemplo:
   ```python
   from sqlalchemy import Column, Integer, String, ForeignKey
@@ -79,9 +155,11 @@ String - Importando para definir colunas do tipo String
       user_id = Column(Integer, ForeignKey('users.id'))
       user = relationship("User", back_populates="addresses")
   ```
-  - Aqui, `User` e `Address` estão relacionados, permitindo que, ao acessar `user.addresses`, você obtenha todos os endereços associados ao usuário.
+  - Aqui, `User` e `Address` estão relacionados, permitindo que, ao acessar `user.addresses`, você obtenha
+   todos os endereços associados ao usuário.
 
-- Objetivo A `relationship` facilita o trabalho com dados relacionados, permitindo o acesso direto aos dados de uma tabela vinculada como uma lista de objetos ou como um único objeto (dependendo do tipo de relacionamento).
+- Objetivo A `relationship` facilita o trabalho com dados relacionados, permitindo o acesso direto aos dados de uma 
+tabela vinculada como uma lista de objetos ou como um único objeto (dependendo do tipo de relacionamento).
 
 Esses conceitos, juntos, são fundamentais para criar associações entre tabelas e trabalhar de forma prática com dados relacionados.
 

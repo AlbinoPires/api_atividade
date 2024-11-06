@@ -54,7 +54,12 @@ class Atividades(Base):
     pessoa_id = Column(Integer, ForeignKey('pessoas.id'))
     pessoa = relationship("Pessoas")
 
-
+    def save(self):
+        db_session.add(self)
+        db_session.commit()
+    def deletar(self):
+        db_session.delete(self)
+        db_session.commit()
 
 
 def init_db():
